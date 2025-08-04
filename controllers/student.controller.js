@@ -2,7 +2,7 @@ const database = require('../utils/database');
 
 exports.getStudent= async (req,res)=>{
     const[studentdata] = await database.execute('select * from Students');
-    // console.log({studentdata})
+    
         res.render('index.ejs',{studentdata});
         // const myco = req.get("cookie").split("=")[1];
         // console.log(myco);

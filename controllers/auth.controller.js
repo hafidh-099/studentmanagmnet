@@ -2,6 +2,7 @@ const db = require("../utils/database");
 const nodemailer = require("nodemailer");
 const mail = require("../utils/mail");
 const sendinf = require("../utils/sendmail");
+const bcrypt = require("bcrypt")
 const crypto = require("crypto"); //for random crytpo token generation("which we will used for email varifiacation")
 
 const mymail = nodemailer.createTransport(mail);
@@ -125,11 +126,19 @@ exports.renderReset=async(req,res)=>{
  const[user]=await db.execute(`select * from Students where resetToken=? && resetTokenExp>?`,[token,Date.now()]);
  console.log(user[0]);
   res.render("resetpass",{
-    userId:user[0].id
+    userId:user[0].id,
+    token:token
   });
 }
 exports.updatePassword=async(req,res)=>{
-  const{password,userId}=req.body;
-  await db.execute("update Students set password=? where id=?",[password,userId]);
+  const{password,userId,token}=req.body;
+  console.log(token)
+  const hashpass= await bcrypt.hashSync(password,10);
+  console.log(hashpass);
+  //for security
+  const [user]=await db.execute("select * from Students where resetToken=? && resetTokenExp>?",[token,Date.now()])
+  const name = user[0].name;
+  console.log(user);
+  await db.execute("update Students set password=?,resetToken=?,resetTokenExp=? where id=? && name=?",[password,null,null,userId,name]);
   res.redirect('/login');
 }
