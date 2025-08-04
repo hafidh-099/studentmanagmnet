@@ -31,7 +31,7 @@ exports.varifyLogin = async (req, res) => {
     res.redirect("/login");
   } else {
     if (password == final.password) {
-      // req.session.isLoggedIn= "true"
+      req.session.isLoggedIn= {userId:final.id,username:final.name}
       res.redirect("/");
     }
   }
