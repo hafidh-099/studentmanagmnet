@@ -4,12 +4,15 @@ exports.getStudent= async (req,res)=>{
     const[studentdata] = await database.execute('select * from Students');
     // console.log({studentdata})
         res.render('index.ejs',{studentdata});
+        // const myco = req.get("cookie").split("=")[1];
+        // console.log(myco);
 }
 exports.geteditpage = async (req,res)=>{
     res.render('add.ejs')
 }
 exports.postdata= async(req,res)=>{
     const {name,email} = req.body
+    // res.cookie("token",name,{httpOnly:true,maxAge:3000});   
     await database.execute('insert into Students(name,email) values (?,?)',[name,email]);
     res.redirect('/')
 }

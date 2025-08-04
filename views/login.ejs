@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>login</title>
+  </head>
+  <body>
+    <% if(error) {%>
+    <div style="padding: 10px; background-color: grey; color: red">
+      <%= error %>
+    </div>
+    <% } %>
+    <form action="/login" method="post">
+      <div class="inp">
+        <label for="username">username</label>
+        <input type="text" placeholder="username" name="username" />
+      </div>
+      <div class="inp">
+        <label for="password">password</label>
+        <input type="password" placeholder="password" name="password" />
+      </div>
+      <div class="btn">
+        <button type="submit">Login</button>
+      </div>
+      <div class="inf">
+        <span>i dont have account</span>
+        <a href="/register">register</a>
+      </div>
+      <div class="inf">
+        <span>forgot password</span>
+        <a href="/reset">reset password</a>
+      </div>
+    </form>
+  </body>
+</html>

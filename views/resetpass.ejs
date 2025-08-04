@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>login</title>
+  </head>
+  <body>
+   
+    <form action="/update-password" method="post">
+      <div class="inp">
+        <label for="password"> new password</label>
+        <input type="password" placeholder="password" name="password" />
+        <input type="hidden" name="userId" value=<%= userId %>>
+      </div>
+      <div class="btn">
+        <button type="submit">update</button>
+      </div>
+    </form>
+  </body>
+</html>
