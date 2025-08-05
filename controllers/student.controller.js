@@ -1,4 +1,5 @@
 const database = require('../utils/database');
+const {validationResult} = require("express-validator");//this is used to gather result(success or error)
 
 exports.getStudent= async (req,res)=>{
     const userId = req.session.isLoggedIn.userId
@@ -14,6 +15,11 @@ exports.geteditpage = async (req,res)=>{
 }
 exports.postdata= async(req,res)=>{
     const {name,email} = req.body
+    const error = validationResult(req);//in request express validator is where is store it message
+    if(!error.isEmpty()){//isEmpty()return t or f
+        console.log(error.array()[0]);
+        return res.status(422).render("add");
+    }
     //protect post data to ensure only valid id user can add product.(user who login can add it own product)
     const userId = req.session.isLoggedIn.userId
     const[studentdata] = await database.execute('select * from Students where id=?',[userId]);

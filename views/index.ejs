@@ -1,11 +1,27 @@
-<h2>Students List</h2>
-<a href="/add">Add New Student</a>
-<ul>
-  <% studentdata.forEach(student => { %>
-    <li>
-      <%= student.name %> - <%= student.email %>
-      <button><a href="/edit/<%= student.id %>">Edit</a></button>
-      <button><a href="/delete/<%= student.id %>">Delete</a></button>
-    </li>
-  <% }) %>
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles/home.css">
+  <title>Document</title>
+</head>
+<body>
+  <h2>Students List</h2>
+<a href="/add" class="add">Add New Student</a>
+<div class="main">
+  <ul>
+    <% studentdata.forEach(student => { %>
+      <li>
+        <%= student.name %> - <%= student.email %>
+        <div class="btn">
+          <button style="background-color: rgb(33, 207, 33);color:white;"><a href="/edit/<%= student.id %>">Edit</a></button>
+          <button  style="background-color: red;color:white;"><a href="/delete/<%= student.id %>">Delete</a></button>
+        </div>
+      </li>
+    <% }) %>
+  </ul>
+</div>
+
+</body>
+</html>

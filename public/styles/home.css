@@ -1,0 +1,44 @@
+body {
+  background-color: rgb(232, 212, 212);
+}
+h2,
+.add {
+  text-align: center;
+  font-weight: 900;
+  border-radius: 10px;
+  border: solid grey 1px;
+  padding: 10px;
+}
+.add {
+  text-decoration: none;
+  color: black;
+}
+.add:hover {
+  background-color: rgb(100, 245, 100);
+  color: white;
+}
+li {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 5px;
+  border-radius: 10px;
+  border: 1px green solid;
+  margin: 10px;
+  width: 50%;
+}
+.btn {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+button a {
+  text-decoration: none;
+  color: black;
+}
+button {
+  padding: 4px;
+  margin: 2px;
+  border-radius: 10px;
+  border: none;
+  width: 100px;
+}
