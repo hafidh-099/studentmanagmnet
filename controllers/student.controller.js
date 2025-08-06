@@ -6,19 +6,20 @@ exports.getStudent= async (req,res)=>{
     // const[studentdata] = await database.execute('select * from Students where id=?',[userId]);
      const[studentdata] = await database.execute('select * from Students');
     //You have a Products table that has a userId column (foreign key). or use this to render admin page
+
         res.render('index.ejs',{studentdata});
         // const myco = req.get("cookie").split("=")[1];
         // console.log(myco);
 }
 exports.geteditpage = async (req,res)=>{
-    res.render('add.ejs')
+    res.render('add.ejs',{validateError:[]})
 }
 exports.postdata= async(req,res)=>{
     const {name,email} = req.body
     const error = validationResult(req);//in request express validator is where is store it message
     if(!error.isEmpty()){//isEmpty()return t or f
-        console.log(error.array()[0]);
-        return res.status(422).render("add");
+        console.log(error.array());
+        return res.status(422).render("add",{validateError:error.array()});
     }
     //protect post data to ensure only valid id user can add product.(user who login can add it own product)
     const userId = req.session.isLoggedIn.userId
@@ -26,8 +27,8 @@ exports.postdata= async(req,res)=>{
     console.log(studentdata);
     const x = studentdata[0].id
     if(x!==userId){
-        console.log({typeofx :typeof x,valueOfx :x})
-        console.log({typeofid :typeof userId,valueOfid :userId})
+        // console.log({typeofx :typeof x,valueOfx :x})
+        // console.log({typeofid :typeof userId,valueOfid :userId})
         res.redirect("/")
     }else{
         // res.cookie("token",name,{httpOnly:true,maxAge:3000});   
