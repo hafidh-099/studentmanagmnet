@@ -14,6 +14,7 @@
         name="name"
         placeholder="Name"
         required
+        value="<%= data.name %>"
         class="<%=validateError.find(e=>e.path==='name') ? 'ivalid':'' %>"
       /><br />
       <input
@@ -21,15 +22,18 @@
         name="Vname"
         placeholder="varify Name"
         required
+        value="<%= data.Vname %>"
       /><br />
       <input
         type="email"
         name="email"
         placeholder="Email"
+        value="<%= data.email %>"
         required
         class="<%=validateError.find(e=>e.path==='email') ? 'ivalid':'' %>"
       /><br />
       <button type="submit">Add</button>
+      <button><a href="/">Home</a></button>
     </form>
   </body>
 </html>

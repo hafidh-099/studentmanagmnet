@@ -5,6 +5,8 @@ const { check, body } = require("express-validator");
 const db = require("../utils/database");
 let mycheck = check("email") //check is check velue everywhare like in header,body,cookie etc
   .isEmail()
+  .normalizeEmail()//make all data in lower case
+  .trim()//no space
   .withMessage("invalid email")
   .custom(async (value, { req }) => {
    
@@ -16,7 +18,8 @@ let mycheck = check("email") //check is check velue everywhare like in header,bo
 
 let nameV = body("name") //(name is paramiter from input body,invalid username is common message to whole nameValidator)
   .isLength({ min: 5, max: 10 })
-  .isAlphanumeric()
+  .trim()
+  .isString()
   .custom(async(value, { req }) => {
     //name confirmation
   // if (!value === req.body.name) {
@@ -48,5 +51,6 @@ router.post("/add", [mycheck, nameV,matchP], studentController.postdata);
 router.get("/edit/:id", studentController.getStudentById);
 router.post("/edit", studentController.postEditedData);
 router.get("/delete/:id", studentController.deleteStudents);
+router.get("/error",studentController.error)
 
 module.exports = router;
